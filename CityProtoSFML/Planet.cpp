@@ -1,5 +1,6 @@
 #include "Planet.h"
 
+//Set up Planet given color and size.
 Planet::Planet(int seedGenSize, int seedGenColorR, int seedGenColorG, int seedGenColorB)
 {
 	this->setRadius(seedGenSize);

@@ -1,7 +1,7 @@
 #pragma once
 #include "Game.h"
 
-//Completely generic class
+//Generic state class.
 class GameState
 {
 public:

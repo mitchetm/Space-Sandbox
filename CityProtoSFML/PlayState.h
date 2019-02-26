@@ -8,7 +8,10 @@
 #include "Universe.h"
 #include "Player.h"
 
-
+/*
+Playing state that ties in all other systems of the game,
+and runs the main loop.
+*/
 class PlayState : public GameState
 {
 public:

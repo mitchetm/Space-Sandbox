@@ -1,6 +1,7 @@
 #pragma once
 #include "Area.h"
 
+/*Container for multiple Quadrants that contain areas.*/
 class Universe
 {
 public:

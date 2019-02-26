@@ -7,10 +7,12 @@
 
 int main()
 {
-	srand(time(NULL)); //Replace time(NULL) with actual seed, given by server masters or other users
+	//Setup random seed.
+	srand(time(NULL));
 
 	Game game;
 
+	//Initialize the game and start at the Main Menu.
 	game.pushState(new MenuState(&game));
 
 	game.mainLoop();

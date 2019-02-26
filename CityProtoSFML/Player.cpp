@@ -1,5 +1,6 @@
 #include "Player.h"
 
+//Setup player's ship.
 void Player::setShipStats(float newThrust, float newDecay, int newMaxSpeed, int newTurningSpeed)
 {
 	thrust = newThrust;
@@ -21,8 +22,10 @@ void Player::setShipStats(float newThrust, float newDecay, int newMaxSpeed, int 
 	ySpeed = 0;
 }
 
+//Check for player movement.
 void Player::checkMovement(float deltaTime)
 {
+	//Move right.
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		this->rotate(turningSpeed * deltaTime);
@@ -30,9 +33,9 @@ void Player::checkMovement(float deltaTime)
 		ySpeed *= decay;
 		//xSpeed += thrust*std::sin(this->getRotation()*(PI / 180));
 		//ySpeed += thrust*std::cos(this->getRotation()*(PI / 180));
-		//std::cout << "Reading rotation right " << (turningSpeed) << std::endl;
 	}
 
+	//Move left.
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		this->rotate(-(turningSpeed*deltaTime));
@@ -42,12 +45,14 @@ void Player::checkMovement(float deltaTime)
 		//ySpeed += thrust*std::cos(this->getRotation()*(PI / 180));
 	}
 
+	//Forward.
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		xSpeed += thrust*std::sin(this->getRotation()*(PI / 180));
 		ySpeed += thrust*std::cos(this->getRotation()*(PI / 180));
 	}
 
+	//Backward.
 	else
 	{
 		//xSpeed += thrust*std::sin(this->getRotation()*(PI / 180));
@@ -56,7 +61,7 @@ void Player::checkMovement(float deltaTime)
 		ySpeed *= decay;
 	}
 
-
+	//Calculate velocity, and speed decay.
 	speed = std::sqrt((xSpeed*xSpeed) + (ySpeed*ySpeed));
 	if (speed > maxSpeed)
 	{

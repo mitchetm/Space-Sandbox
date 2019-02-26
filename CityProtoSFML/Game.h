@@ -7,6 +7,7 @@
 
 class GameState;
 
+/*Handles states of the game.*/
 class Game
 {
 public:

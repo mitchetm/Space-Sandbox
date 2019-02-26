@@ -7,8 +7,10 @@
 #include "Game.h"
 #include <cmath>
 #include <iostream>
-/*Class that defines a playable zone,
-One quadrant of a universe*/
+/*
+Class that defines a playable zone,
+One quadrant of a universe.
+*/
 class Area
 {
 public:

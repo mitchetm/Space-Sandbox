@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "GameState.h"
+
+//Create a new window.
 Game::Game()
 {
 	window.create(sf::VideoMode(1920, 1080), "CityProto");
@@ -7,11 +9,13 @@ Game::Game()
 	window.setFramerateLimit(60);
 }
 
+//Allow a state to be pushed onto the stack.
 void Game::pushState(GameState* handleState)
 {
 	ourStates.push_back(handleState);
 }
 
+//Pop state off of stack.
 void Game::popState()
 {
 	ourStates.back();
@@ -19,12 +23,14 @@ void Game::popState()
 	ourStates.pop_back();
 }
 
+//Remove states when game is closed.
 Game::~Game()
 {
 	while (!ourStates.empty())
 		popState();
 }
 
+//Get the current state.
 GameState* Game::currentState()
 {
 	if (ourStates.empty())
@@ -33,6 +39,7 @@ GameState* Game::currentState()
 		return ourStates.back();
 }
 
+//Main loop for handling states.
 void Game::mainLoop()
 {
 	sf::Clock clock;

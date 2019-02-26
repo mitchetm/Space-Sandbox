@@ -1,35 +1,35 @@
 #include "PlayState.h"
 
+//Create a new playstate, universe and player.
 PlayState::PlayState(Game * game)
 {
 	this->game = game;
 	universeManager.createUniverse(1);
 	gameCam.reset(sf::FloatRect(0, 0, game->window.getSize().x, game->window.getSize().y));
-	//gameCam.setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
 	ship.setShipStats(1, .97, 2, 100);
 	ship.setOrigin(40, 40);
 	ship.setPosition(universeManager.getQuadrants()[0].getPlanetVector()[0].getPosition());
 	gameCam.zoom(2);
-	//shipShape.setSize(sf::Vector2f(200, 400));
-	//ship.setPosition(200, 200);
 }
 
+//Draw the Universe and player.
 void PlayState::draw(const float dt)
 {
 	universeManager.getQuadrants()[0].drawArea(game);
-	//game->window.draw(shipShape);
 	game->window.draw(ship);
 }
 
+//Update positions, and events.
 void PlayState::update(const float dt)
 {
-	if (pauseLogic == false)
+	if (!pauseLogic)
 	{
 		universeManager.getQuadrants()[0].checkForMouseHovers(game);
 		ship.checkMovement(dt);
 	}
 }
 
+//Handle input events.
 void PlayState::inputProcessing()
 {
 	sf::Event event;
@@ -38,17 +38,18 @@ void PlayState::inputProcessing()
 	{
 		switch (event.type)
 		{
-			/* Close the window */
+			//Close the window.
 		case sf::Event::Closed:
 			this->game->window.close();
 			break;
 
-			//pause game
+			//pause game.
 		case sf::Event::KeyPressed:
 			if (event.key.code == sf::Keyboard::Escape)
 				pauseGame();
 			break;
 
+			//Adjust game camera if window gets resized.
 		case sf::Event::Resized:
 			gameCam.reset(sf::FloatRect(0, 0, event.size.width, event.size.height)); 
 			this->game->window.setView(gameCam);
@@ -56,10 +57,11 @@ void PlayState::inputProcessing()
 		}
 	}
 
+	//Run mouse button functionality checks when mouse button is clicked.
 	if (event.mouseButton.button == sf::Mouse::Left && event.type == sf::Event::MouseButtonReleased)
 			mouseButtonFunctionality();
 
-
+	//FPS
 	float frametime = clock.getElapsedTime().asSeconds();
 
 	clock.restart();
@@ -68,8 +70,15 @@ void PlayState::inputProcessing()
 
 }
 
+//Handle player clicking on planets.
 void PlayState::mouseButtonFunctionality()
 {
+	if (selectedPlanet == true)
+	{
+		selectedPlanet = false;
+		universeManager.getQuadrants()[0].getPlanetSelection().setOutlineThickness(0);
+
+	}
 	if (universeManager.getQuadrants()[0].getPlanetSelectedID() >= 0 && selectedPlanet == false && editorState == false)
 	{
 		selectedPlanet = true;

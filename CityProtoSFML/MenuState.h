@@ -6,6 +6,7 @@
 #include <iostream>
 #include "GameState.h"
 
+/*Main Menu state, move to play state when enter is pressed.*/
 class MenuState : public GameState
 {
 public:

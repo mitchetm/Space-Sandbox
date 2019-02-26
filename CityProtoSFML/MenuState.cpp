@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "PlayState.h"
 
+//Create menu state.
 MenuState::MenuState(Game* game)
 {
 	this->game = game;
@@ -12,6 +13,7 @@ MenuState::MenuState(Game* game)
 	newGameButton->GetSignal(sfg::Widget::OnLeftClick).Connect([this] { this->newGame(); });
 }
 
+//Handle menu button processes.
 void MenuState::inputProcessing()
 {
 	sf::Event event;

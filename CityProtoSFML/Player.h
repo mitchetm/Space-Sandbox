@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 
+//Player class that handles movement and player graphics.
 class Player : public sf::Sprite
 {
 public:

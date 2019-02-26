@@ -5,6 +5,7 @@ Area::Area(void)
 {
 }
 
+//Create a new area filled with planets.
 Area::Area(int numbPlanets)
 {
 	for (int i = 0; i < numbPlanets; i++)
@@ -16,6 +17,7 @@ Area::Area(int numbPlanets)
 	}
 }
 
+//Check if any planets are being hovered over by the mouse.
 void Area::checkForMouseHovers(Game * game)
 {
 	sf::Vector2f mousePos = game->window.mapPixelToCoords(sf::Mouse::getPosition(game->window));
@@ -29,17 +31,20 @@ void Area::checkForMouseHovers(Game * game)
 	}
 }
 
+//Draws the planets to the buffer for this area.
 void Area::drawArea(Game * game)
 {
 	for (int i = 0; i < planetsList.size(); i++)
 		game->window.draw(planetsList[i]);
 }
 
+//Get ID for the planet.
 int Area::getPlanetSelectedID()
 {
 	return selectedPlanetID;
 }
 
+//Return the currently selected planet.
 Planet & Area::getPlanetSelection()
 {
 	return planetsList[selectedPlanetID];
